@@ -19,7 +19,7 @@
             background-color: rgb(195, 216, 255);
             border-radius: 5%;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-            width: 30vw;
+            width: 27vw;
             height: 40vh;
             padding: 2%;
             display: flex;
@@ -37,6 +37,12 @@
             color: #ffffff;
             margin: 10px 0;
         }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         input {
             width: 80%;
             padding: 10px 15px;
@@ -44,17 +50,12 @@
             border: none;
             background-color: #f3f6ff;
             font-size: 16px;
-            outline: none;              /* bỏ viền xanh khi click */
-            transition: 0.2s;           /* hiệu ứng focus */
-        }
-
-        /* Hiệu ứng khi click vào ô */
+            outline: none;             
+            transition: 0.2s;           
         input:focus {
             border-color: #5c8dff;
             box-shadow: 0 0 6px rgba(92, 141, 255, 0.5);
         }
-
-        /* Nút login */
         button {
             width: 50%;
             padding: 12px;
@@ -71,10 +72,9 @@
         }
     </style>
 
+    <!-- Liên kết css -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
 
-
-    <!-- Liên kết css
-    <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
     <div class="div1">
@@ -82,14 +82,19 @@
         <h2>LOGIN</h2>
         <form>
             <input type = "text" placeholder="username">
-            <br><br>
+            <br>
             <input type = "password" placeholder="password">
-            <br><br>
+            <br>
             <button onclick="login()">Login</button>
         </form>
     </div>
 
+
+    <script>
+        
+    </script>
     <!-- Liên kết JS -->
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+
 </body>
 </html>
