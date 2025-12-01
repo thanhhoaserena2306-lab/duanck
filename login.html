@@ -35,6 +35,39 @@
         }
         h2 {
             color: #ffffff;
+            margin: 10px 0;
+        }
+        input {
+            width: 80%;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: none;
+            background-color: #f3f6ff;
+            font-size: 16px;
+            outline: none;              /* bỏ viền xanh khi click */
+            transition: 0.2s;           /* hiệu ứng focus */
+        }
+
+        /* Hiệu ứng khi click vào ô */
+        input:focus {
+            border-color: #5c8dff;
+            box-shadow: 0 0 6px rgba(92, 141, 255, 0.5);
+        }
+
+        /* Nút login */
+        button {
+            width: 50%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: #5c8dff;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #3a6cff;
         }
     </style>
 
@@ -54,12 +87,8 @@
             <br><br>
             <button onclick="login()">Login</button>
         </form>
-        
-          
     </div>
 
-
-    
     <!-- Liên kết JS -->
     <script src="script.js"></script>
 </body>
