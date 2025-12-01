@@ -4,11 +4,59 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trang Login</title>
-    <!--Liên kết css-->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: rgb(208, 223, 253);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        .div1 {
+            background-color: rgb(195, 216, 255);
+            border-radius: 5%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            width: 30vw;
+            height: 40vh;
+            padding: 2%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .divoo1{
+            border-radius: 50%;
+            background-color: azure;
+            width: 100px;
+            height: 100px;
+        }
+        h2 {
+            color: #ffffff;
+        }
+    </style>
+
+
+
+    <!-- Liên kết css
+    <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-    
+    <div class="div1">
+        <div class="divoo1"></div>  
+        <h2>LOGIN</h2>
+        <form>
+            <input type = "text" placeholder="username">
+            <br><br>
+            <input type = "password" placeholder="password">
+            <br><br>
+            <button onclick="login()">Login</button>
+        </form>
+        
+          
+    </div>
 
 
     
