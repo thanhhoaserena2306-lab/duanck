@@ -106,16 +106,6 @@
         .button-create:hover {
             background:#e7e7e7;
         }
-        .return {
-            margin-top: 15px;
-            color: black;
-            text-decoration: underline;
-            font-size: 15px;
-        }
-
-        .return:hover {
-            opacity: 0.7;
-        }
         p {
             font-size: 16px;
         }
@@ -127,133 +117,137 @@
 
 </head>
 <body>
-    <!-- login -->
+    <!-- LOGIN -->
     <div class="login-box">
         <div class="avatar"></div>  
         <h2>LOGIN</h2>
 
+        <!-- Tên đăng nhập -->
         <div class="input-box">
             <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
-            <input id="tk" type = "text" placeholder="Tên đăng nhập">
+            <input id="dn_tk" type = "text" placeholder="Tên đăng nhập">
         </div>
 
+        <!-- Mật khẩu -->
         <div class="input-box">
             <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
-            <input id="mk" type = "password" placeholder="Password">
+            <input id="dn_mk" type = "password" placeholder="Mật khẩu">
         </div>
 
-        <button class="button-login" onclick="login()">Log In</button>
+        <button class="button-login" onclick="login()">Đăng nhập</button>
         <hr>
         <p>Bạn chưa có tài khoản?</p>
-        <button class="button-create" onclick="dangky()">Create new Account</button>
+        <button class="button-create" onclick="dangky()">Tạo tài khoản mới</button>
     </div>
 
-    <!-- sign up -->
+    <!-- SIGN UP -->
     <div class="create-box">
         <h2>SIGN UP</h2>
-
-        <div class="input-box">
-            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
-            <input id="new_user" type = "text" placeholder="user name">
-        </div>
         
         <div class="input-box">
-            <img src="https://cdn-icons-png.flaticon.com/128/13/13936.png">
-            <input id="new_sdt" type = "number" placeholder="Số điện thoại">
-        </div>
-
-        <div class="input-box">
-            <img src="https://cdn-icons-png.flaticon.com/128/646/646135.png">
-            <input id="new_email" type = "email" placeholder="Email">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+            <input id="dk_tk" type = "text" placeholder="Tên đăng nhập">
         </div>
 
         <div class="input-box">
             <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
-            <input id="new_mk" type = "password" placeholder="Password">
+            <input id="dk_mk" type = "password" placeholder="Mật khẩu">
         </div>
 
-        <button class="button-create" onclick="tao_tk()">Create Account</button>
+        <button class="button-create" onclick="tao_tk()">Tạo tài khoản</button>
         <p class="return" onclick="backToLogin()">Quay lại</p>
     </div>
 
 
     <script>
-        //chuyển sang sign up
+
+        //Khởi tạo tài khoản với quyền admin
+        if (!localStorage.getItem('ds_tk')) {
+            let ds_admin = [
+                {taikhoan: 'thhoa', matkhau: '1', quyen: 'admin'},
+                {taikhoan: 'dieuan', matkhau: '1', quyen: 'admin'}
+            ];
+
+        localStorage.setItem('ds_tk', JSON.stringify(ds_admin));
+        }
+                
+        //Chuyển sang sign up
         function dangky() { 
             document.querySelector('.login-box').classList.add('hidden'); 
             document.querySelector('.create-box').style.display = 'block'; 
         } 
         
-        //quay lại login
+        //Quay lại login
         function backToLogin() { 
             document.querySelector('.create-box').style.display = 'none'; 
             document.querySelector('.login-box').classList.remove('hidden'); 
         }
 
-        //khởi tạo tài khoản admin
-        if (!localStorage.getItem('ds_tk')) {
-            let ds = [
-                { user: 'admin', pass: '1', quyen: 'admin' }
-            ];
-            localStorage.setItem('ds_tk', JSON.stringify(ds));
-        }
-        //đăng nhập
-        function login() { 
-            // Ẩn khung login khi signup
-            document.querySelector('.create-box').style.display = 'none'; 
-            document.querySelector('.login-box').classList.remove('hidden');
-            
-            //đăng nhập tài khoản
-            let tk = document.getElementById('tk').value;
-            let mk = document.getElementById('mk').value;
-
-            let ds = JSON.parse(localStorage.getItem('ds_tk')) || [];
-
-        for (let acc of ds) {
-            if (acc.user === tk && acc.pass === mk) {
-
-                localStorage.setItem("dangnhap", JSON.stringify(acc));
-
-                alert("Đăng nhập thành công!");
-
-                // chuyển trang
-                location.href = "quanly.html";
-
-                return;
-            }
-        }
-
-        alert("Sai tài khoản hoặc mật khẩu!");
-    }
-
-        // đăng ký
+        //Đăng Ký tài khoản (quyền User)
         function tao_tk() {
-            let user = document.getElementById("new_user").value;
-            let email = document.getElementById("new_email").value;
-            let pass = document.getElementById("new_mk").value;
+            let ds_tk = JSON.parse(localStorage.getItem('ds_tk')) || [];
 
-            if (user == "" || email == "" || pass == "") {
-                alert("Vui lòng nhập đầy đủ thông tin!");
+            let tk = document.getElementById('dk_tk').value;
+            let mk = document.getElementById('dk_mk').value;
+           
+            //kiểm tra nhập đầy đủ
+            if (!tk || !mk) {
+                alert("Vui lòng nhập đầy đủ!");
                 return;
             }
-
-            let ds = JSON.parse(localStorage.getItem('ds_tk')) || [];
-
-            // kiểm tra trùng username
-            for (let tk of ds) {
-                if (tk.user === user) {
-                    alert("Tên tài khoản đã tồn tại!");
+            
+            //kiểm tra trùng tài khoản
+            for (let i = 0; i < ds_tk.length; i++) {
+                if (ds_tk[i].taikhoan === tk) {
+                    alert("Tài khoản đã tồn tại!");
                     return;
                 }
             }
 
-            ds.push({ user, pass, quyen: "user" }); // user tự tạo = quyền user
+            //tai khoan moi (quyền user)
+            ds_tk.push({
+                taikhoan: tk,
+                matkhau: mk,
+                quyen: "user",
+            })
 
-            localStorage.setItem('ds_tk', JSON.stringify(ds));
+            localStorage.setItem('ds_tk', JSON.stringify(ds_tk));
 
             alert("Tạo tài khoản thành công!");
+
+            // // Xóa nội dung ô nhập (không bắt buộc)
+            // document.getElementById('dk_tk').value = "";
+            // document.getElementById('dk_mk').value = "";
             backToLogin();
         }
+
+        //Đăng nhập
+        function login() { 
+            let ds_tk = JSON.parse(localStorage.getItem('ds_tk')) || [];
+
+            let tk = document.getElementById('dn_tk').value;
+            let mk = document.getElementById('dn_mk').value;
+
+            if(ds_tk.length == 0) {
+                alert("Chưa có tài khoản nào!");
+                return;
+            }
+            else{
+                for (let i = 0; i < ds_tk.length; i++) {
+                    if (ds_tk[i].taikhoan == tk && ds_tk[i].matkhau == mk) {
+                        //lưu thông tin người dùng
+                        localStorage.setItem('user', JSON.stringify(ds_tk[i]));
+                        alert("Đăng nhập thành công!");
+
+                        location.href = "quanly.html";
+
+                        return;
+                    }
+                }
+                alert("Sai tài khoản hoặc sai mật khẩu!");
+            }
+        }
+        
     </script>
     <!-- Liên kết JS -->
     <!-- <script src="script.js"></script> -->
