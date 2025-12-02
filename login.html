@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,9 +216,9 @@
 
             alert("Tạo tài khoản thành công!");
 
-            // // Xóa nội dung ô nhập (không bắt buộc)
-            // document.getElementById('dk_tk').value = "";
-            // document.getElementById('dk_mk').value = "";
+            // Xóa nội dung ô nhập sau khi đăng kí xong
+            document.getElementById('dk_tk').value = "";
+            document.getElementById('dk_mk').value = "";
             backToLogin();
         }
 
@@ -228,17 +229,22 @@
             let tk = document.getElementById('dn_tk').value;
             let mk = document.getElementById('dn_mk').value;
 
-            if(ds_tk.length == 0) {
+            if (ds_tk.length == 0) {
                 alert("Chưa có tài khoản nào!");
                 return;
             }
-            else{
+            else {
                 for (let i = 0; i < ds_tk.length; i++) {
                     if (ds_tk[i].taikhoan == tk && ds_tk[i].matkhau == mk) {
                         //lưu thông tin người dùng
                         localStorage.setItem('user', JSON.stringify(ds_tk[i]));
                         alert("Đăng nhập thành công!");
+                        
+                        // Xóa nội dung ô nhập sau khi đăng nhập xong
+                        document.getElementById('dn_tk').value = "";
+                        document.getElementById('dn_mk').value = "";
 
+                        //chuyển trang sau khi đăng nhập
                         location.href = "quanly.html";
 
                         return;
