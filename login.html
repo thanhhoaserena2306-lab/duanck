@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
         }
         .login-box {
             width: 350px;
@@ -76,10 +76,10 @@
             left: 12px;
             top: 50%;
             transform: translateY(-50%);
-            opacity: 0.7;
+            opacity: 0.7;   /*Độ trong suốt */
         }
         .button-login {
-            width: 35%;
+            width: 100%;
             padding: 12px;
             margin-top: 8px;
             color: white;
@@ -96,7 +96,6 @@
         .button-create {
             width: auto;
             padding: 12px;
-            margin-top: 8px;
             color: #1f6fb3;
             font-size: 15px;
             border: 1px solid #2b6cb1;
@@ -107,6 +106,19 @@
         .button-create:hover {
             background:#e7e7e7;
         }
+        .return {
+            margin-top: 15px;
+            color: black;
+            text-decoration: underline;
+            font-size: 15px;
+        }
+
+        .return:hover {
+            opacity: 0.7;
+        }
+        p {
+            font-size: 16px;
+        }
 
     </style>
 
@@ -115,55 +127,132 @@
 
 </head>
 <body>
-    <div class="div0">
-        <!-- login -->
-        <div class="login-box">
-            <div class="avatar"></div>  
-            <h2>LOGIN</h2>
-            <div class="input-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
-                <input type = "text" placeholder="Email hoặc số điện thoại">
-            </div>
-            <div class="input-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
-                <input type = "password" placeholder="Password">
-            </div>
-            <button class="button-login" onclick="login()">Log in</button> &nbsp 
-            <button class="button-create" onclick="create()">Create Account</button>
+    <!-- login -->
+    <div class="login-box">
+        <div class="avatar"></div>  
+        <h2>LOGIN</h2>
+
+        <div class="input-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+            <input id="tk" type = "text" placeholder="Tên đăng nhập">
         </div>
-        <!-- sign up -->
-        <div class="create-box">
-            <h2>SIGN UP</h2>
-            <div class="input-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
-                <input type = "text" placeholder="user name">
-            </div>
-            <div class="input-box">
-                <img src="https://cdn-icons-png.flaticon.com/128/13/13936.png">
-                <input type = "number" placeholder="Số điện thoại">
-            </div>
-            <div class="input-box">
-                <img src="https://cdn-icons-png.flaticon.com/128/646/646135.png">
-                <input type = "email" placeholder="Email">
-            </div>
-            <div class="input-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
-                <input type = "password" placeholder="Password">
-            </div>
-            <button class="button-create" onclick="create()">Create Account</button>
+
+        <div class="input-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+            <input id="mk" type = "password" placeholder="Password">
         </div>
+
+        <button class="button-login" onclick="login()">Log In</button>
+        <hr>
+        <p>Bạn chưa có tài khoản?</p>
+        <button class="button-create" onclick="dangky()">Create new Account</button>
+    </div>
+
+    <!-- sign up -->
+    <div class="create-box">
+        <h2>SIGN UP</h2>
+
+        <div class="input-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+            <input id="new_user" type = "text" placeholder="user name">
+        </div>
+        
+        <div class="input-box">
+            <img src="https://cdn-icons-png.flaticon.com/128/13/13936.png">
+            <input id="new_sdt" type = "number" placeholder="Số điện thoại">
+        </div>
+
+        <div class="input-box">
+            <img src="https://cdn-icons-png.flaticon.com/128/646/646135.png">
+            <input id="new_email" type = "email" placeholder="Email">
+        </div>
+
+        <div class="input-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+            <input id="new_mk" type = "password" placeholder="Password">
+        </div>
+
+        <button class="button-create" onclick="tao_tk()">Create Account</button>
+        <p class="return" onclick="backToLogin()">Quay lại</p>
     </div>
 
 
     <script>
-         function create() {
-            document.querySelector('.login-box').classList.add('hidden');
-            document.querySelector('.create-box').style.display = 'block';
+        //chuyển sang sign up
+        function dangky() { 
+            document.querySelector('.login-box').classList.add('hidden'); 
+            document.querySelector('.create-box').style.display = 'block'; 
+        } 
+        
+        //quay lại login
+        function backToLogin() { 
+            document.querySelector('.create-box').style.display = 'none'; 
+            document.querySelector('.login-box').classList.remove('hidden'); 
         }
 
-        function login() {
-            document.querySelector('.create-box').style.display = 'none';
+        //khởi tạo tài khoản admin
+        if (!localStorage.getItem('ds_tk')) {
+            let ds = [
+                { user: 'admin', pass: '1', quyen: 'admin' }
+            ];
+            localStorage.setItem('ds_tk', JSON.stringify(ds));
+        }
+        //đăng nhập
+        function login() { 
+            // Ẩn khung login khi signup
+            document.querySelector('.create-box').style.display = 'none'; 
             document.querySelector('.login-box').classList.remove('hidden');
+            
+            //đăng nhập tài khoản
+            let tk = document.getElementById('tk').value;
+            let mk = document.getElementById('mk').value;
+
+            let ds = JSON.parse(localStorage.getItem('ds_tk')) || [];
+
+        for (let acc of ds) {
+            if (acc.user === tk && acc.pass === mk) {
+
+                localStorage.setItem("dangnhap", JSON.stringify(acc));
+
+                alert("Đăng nhập thành công!");
+
+                // chuyển trang
+                location.href = "quanly.html";
+
+                return;
+            }
+        }
+
+        alert("Sai tài khoản hoặc mật khẩu!");
+    }
+
+        // đăng ký
+        function tao_tk() {
+            let user = document.getElementById("new_user").value;
+            let email = document.getElementById("new_email").value;
+            let pass = document.getElementById("new_mk").value;
+
+            if (user == "" || email == "" || pass == "") {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+
+            let ds = JSON.parse(localStorage.getItem('ds_tk')) || [];
+
+            // kiểm tra trùng username
+            for (let tk of ds) {
+                if (tk.user === user) {
+                    alert("Tên tài khoản đã tồn tại!");
+                    return;
+                }
+            }
+
+            ds.push({ user, pass, quyen: "user" }); // user tự tạo = quyền user
+
+            localStorage.setItem('ds_tk', JSON.stringify(ds));
+
+            alert("Tạo tài khoản thành công!");
+            backToLogin();
         }
     </script>
     <!-- Liên kết JS -->
