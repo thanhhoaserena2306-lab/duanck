@@ -9,70 +9,105 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-color: rgb(208, 223, 253);
+            background-color: #62a9d8;
             display: flex;
             justify-content: center;
             align-items: center;
-            align-content: center;
+            font-family: Arial, Helvetica, sans-serif;
         }
-        .div1 {
-            background-color: rgb(195, 216, 255);
-            border-radius: 5%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-            width: 27vw;
-            height: 40vh;
-            padding: 2%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .login-box {
+            width: 350px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            background-color: #83b9e7;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+
         }
-        .divoo1{
+        .create-box {
+            display: none;
+            width: 350px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            background-color: #83b9e7;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+        }
+        .hidden {
+            display: none;
+        }
+        .avatar {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background-color: #f0efef;
-            width: 100px;
-            height: 100px;
+            margin: 0 auto 15px;
+            background-color: #fff;
             background-image: url('https://cdn-icons-png.flaticon.com/512/847/847969.png');
             background-size: cover;
         }
         h2 {
-            color: #ffffff;
-            margin: 10px 0;
+            color: white;
+            margin-bottom: 25px;
+            font-weight: normal;
         }
-        form {
+        .input-box{
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
         }
-        input {
-            width: 80%;
-            padding: 10px 15px;
-            border-radius: 10px;
+        .input-box input {
+            width: 300px;
+            padding: 10px 15px 10px 40px;
             border: none;
-            background-color: #f3f6ff;
-            font-size: 16px;
-            outline: none;             
-            transition: 0.2s;     
-        }      
-        input:focus {
-            border-color: #5c8dff;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+
+        }
+        .input-box input:focus {
+            border-color: #477eff;
             box-shadow: 0 0 6px rgba(92, 141, 255, 0.5);
         }
-        button {
-            width: 50%;
+        .input-box img {
+            width: 20px;
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+        }
+        .button-login {
+            width: 35%;
             padding: 12px;
-            font-size: 16px;
-            border: none;
-            border-radius: 10px;
-            background-color: #5c8dff;
+            margin-top: 8px;
             color: white;
-            cursor: pointer;
+            font-size: 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #2b6cb1;
             transition: 0.2s;
+
         }
-        button:hover {
-            background-color: #3a6cff;
+        .button-login:hover {
+            background-color: #1e4e85;
         }
+        .button-create {
+            width: auto;
+            padding: 12px;
+            margin-top: 8px;
+            color: #1f6fb3;
+            font-size: 15px;
+            border: 1px solid #2b6cb1;
+            border-radius: 20px;
+            background-color: #fff;
+            transition: 0.2s;       
+        }
+        .button-create:hover {
+            background:#e7e7e7;
+        }
+
     </style>
 
     <!-- Liên kết css -->
@@ -80,21 +115,56 @@
 
 </head>
 <body>
-    <div class="div1">
-        <div class="divoo1"></div>  
-        <h2>LOGIN</h2>
-        <form>
-            <input type = "text" placeholder="username">
-            <br>
-            <input type = "password" placeholder="password">
-            <br>
-            <button onclick="login()">Login</button>
-        </form>
+    <div class="div0">
+        <!-- login -->
+        <div class="login-box">
+            <div class="avatar"></div>  
+            <h2>LOGIN</h2>
+            <div class="input-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+                <input type = "text" placeholder="Email hoặc số điện thoại">
+            </div>
+            <div class="input-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+                <input type = "password" placeholder="Password">
+            </div>
+            <button class="button-login" onclick="login()">Log in</button> &nbsp 
+            <button class="button-create" onclick="create()">Create Account</button>
+        </div>
+        <!-- sign up -->
+        <div class="create-box">
+            <h2>SIGN UP</h2>
+            <div class="input-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+                <input type = "text" placeholder="user name">
+            </div>
+            <div class="input-box">
+                <img src="https://cdn-icons-png.flaticon.com/128/13/13936.png">
+                <input type = "number" placeholder="Số điện thoại">
+            </div>
+            <div class="input-box">
+                <img src="https://cdn-icons-png.flaticon.com/128/646/646135.png">
+                <input type = "email" placeholder="Email">
+            </div>
+            <div class="input-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+                <input type = "password" placeholder="Password">
+            </div>
+            <button class="button-create" onclick="create()">Create Account</button>
+        </div>
     </div>
 
 
     <script>
+         function create() {
+            document.querySelector('.login-box').classList.add('hidden');
+            document.querySelector('.create-box').style.display = 'block';
+        }
 
+        function login() {
+            document.querySelector('.create-box').style.display = 'none';
+            document.querySelector('.login-box').classList.remove('hidden');
+        }
     </script>
     <!-- Liên kết JS -->
     <!-- <script src="script.js"></script> -->
